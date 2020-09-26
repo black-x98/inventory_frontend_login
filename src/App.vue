@@ -1,28 +1,33 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app >
+    <v-main class="mx-12 mt-8">
+     <Navbar v-if="isNotLogin" />
+     <!-- <div>{{this.$route.path}}</div> -->
+      <router-view/>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Navbar from "@/components/Navbar";
 export default {
-  name: 'App',
+  computed: {
+    isNotLogin() {
+      return this.$route.path != '/';
+    }
+  },
   components: {
-    HelloWorld
+     Navbar,
+  },
+  data() {
+	return{
+		posts: []
+	}
+  },
+  methods: {
+    createProduct: function () {
+      alert('createProduct');
+    }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
